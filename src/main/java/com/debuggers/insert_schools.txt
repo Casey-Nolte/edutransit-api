@@ -1,0 +1,27 @@
+INSERT INTO school (school_id, school_name, school_address)
+VALUES
+    (3,'American International School of Cape Town', '42 Soetvlei Ave, Constantia, Cape Town'),
+    (4,'Rondebosch Boys'' High School', 'Rondebosch, Cape Town'),
+    (5,'Bishops Diocesan College', 'Rondebosch, Cape Town'),
+    (6,'Westerford High School', 'Rondebosch/Newlands, Cape Town'),
+    (7,'Wynberg Boys'' High School', 'Wynberg, Cape Town'),
+    (8,'Wynberg Girls'' High School', 'Wynberg, Cape Town'),
+    (9,'Rustenburg Girls'' High School', 'Rosebank, Cape Town'),
+    (10,'Rhodes High School', 'Mowbray, Cape Town'),
+    (11,'Camps Bay High School', 'Camps Bay, Cape Town'),
+    (12,'Cape Town High School', 'Cape Town City Centre');
+INSERT INTO school (school_id, school_name, school_address)
+VALUES
+    (13,'Claremont High School', 'Claremont, Cape Town'),
+    (14,'Sea Point High School', 'Sea Point, Cape Town '),
+    (15,'South Peninsula High School', 'South Peninsula, Cape Town'),
+    (16,'Fish Hoek High School', 'Fish Hoek, Cape Town'),
+    (17,'Beacon Hill Secondary School', 'Capricorn Hill (Metro South)'),
+    (18,'Imizamo Yethu’s Bayside Christian High School ', 'Imizamo Yethu, Cape Town'),
+    (19,'Ambleside School of Hout Bay', 'Hout Bay Harbour, Cape Town'),
+    (20,'Bay Primary School', '10th Avenue, Fish Hoek, 7945'),
+    (21,'Chelmsford Independent School', 'Tableview, Cape Town'),
+    (22,'Cecil Road Primary School', 'Salt River, Cape Town'),
+    (23,'Chapel Street Primary School', 'Zonnebloem, Cape Town'),
+    (24,'Cavalleria (Cavalleria Primary)', 'Kraaifontein, Cape Town'),
+    (25,'Cbn St John''s Parklands', 'Green Point, Cape Town');
