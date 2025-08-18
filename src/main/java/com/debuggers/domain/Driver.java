@@ -1,31 +1,39 @@
 package com.debuggers.domain;
+/*
 
+     Author: Bonga Velem (220052379)
+
+    */
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 
 @Entity
 @Table(name = "driver", schema = "prt3debuggers")
-public class Driver {
+public class Driver implements Serializable {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "driver_id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "criminal_record")
+    @Column(name = "criminal_Record")
     private String criminalRecord;
 
-    @Column(name = "max_passengers")
+    @Column(name = "max_Passengers")
     private String maxPassengers;
 
-    @Column(name = "available_seats")
+    @Column(name = "available_Seats")
     private String availableSeats;
 
-    public Driver(){
+    public Driver() {
     }
 
-    private Driver(Builder builder) {
+    public Driver(Builder builder) {
         this.id = builder.id;
         this.user = builder.user;
         this.criminalRecord = builder.criminalRecord;
@@ -53,7 +61,38 @@ public class Driver {
         return availableSeats;
     }
 
-    public static class Builder{
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setCriminalRecord(String criminalRecord) {
+        this.criminalRecord = criminalRecord;
+    }
+
+    public void setMaxPassengers(String maxPassengers) {
+        this.maxPassengers = maxPassengers;
+    }
+
+    public void setAvailableSeats(String availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "id=" + id +
+                ", user=" + user +
+                ", criminalRecord='" + criminalRecord + '\'' +
+                ", maxPassengers='" + maxPassengers + '\'' +
+                ", availableSeats='" + availableSeats + '\'' +
+                '}';
+    }
+
+    public static class Builder {
         private Long id;
         private User user;
         private String criminalRecord;
@@ -70,12 +109,12 @@ public class Driver {
             return this;
         }
 
-        public Builder setCriminalRecord(String criminalRecord){
+        public Builder setCriminalRecord(String criminalRecord) {
             this.criminalRecord = criminalRecord;
             return this;
         }
 
-        public Builder setMaxPassengers (String maxPassengers) {
+        public Builder setMaxPassengers(String maxPassengers) {
             this.maxPassengers = maxPassengers;
             return this;
         }
@@ -85,9 +124,17 @@ public class Driver {
             return this;
         }
 
-        public Driver build()   {
+        public Builder copy(Driver driver) {
+            this.id = driver.id;
+            this.user = driver.user;
+            this.criminalRecord = driver.criminalRecord;
+            this.maxPassengers = driver.maxPassengers;
+            this.availableSeats = driver.availableSeats;
+            return this;
+        }
+
+        public Driver build() {
             return new Driver(this);
         }
     }
-
 }

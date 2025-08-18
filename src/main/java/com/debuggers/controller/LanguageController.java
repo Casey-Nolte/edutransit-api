@@ -1,38 +1,36 @@
 package com.debuggers.controller;
 
 import com.debuggers.domain.Language;
-import com.debuggers.service.LanguageService;
+import com.debuggers.service.impl.LanguageServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/languages")
+@RequestMapping
 public class LanguageController {
 
-    private final LanguageService languageService;
+    private LanguageServiceImpl service;
 
-    public LanguageController(LanguageService languageService) {
-        this.languageService = languageService;
+    private LanguageController(LanguageServiceImpl service){
+        this.service = service;
     }
 
-    @PostMapping
-    public Language createLanguage(@RequestBody Language language) {
-        return languageService.save(language);
+    @PostMapping("/language/create")
+    public Language create(@RequestBody Language language){
+        return service.create(language);
     }
 
-    @GetMapping("/{id}")
-    public Language getLanguageById(@PathVariable Long id) {
-        return languageService.findById(id);
+    @GetMapping("/read{id}")
+    public Language read(@PathVariable Long id){
+        return service.read(id);
     }
 
-    @GetMapping
-    public List<Language> getAllLanguages() {
-        return languageService.findAll();
+    @PutMapping("/update")
+    public Language update(@RequestBody Language language){
+        return service.update(language);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteLanguage(@PathVariable Long id) {
-        languageService.delete(id);
+    @DeleteMapping("/delete{id}")
+    public void delete(@PathVariable Long id){
+        service.delete(id);
     }
 }

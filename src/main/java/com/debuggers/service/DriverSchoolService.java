@@ -1,34 +1,14 @@
 package com.debuggers.service;
 
-import com.debuggers.domain.Driverschool;
-import com.debuggers.repository.IDriverSchoolRepository;
+import com.debuggers.domain.DriverSchool;
+import com.debuggers.domain.DriverschoolId;
 
 import java.util.List;
 
-public class DriverSchoolService {
-    private final IDriverSchoolRepository driverSchoolRepository;
 
-    public DriverSchoolService(IDriverSchoolRepository driverSchoolRepository){
-        this.driverSchoolRepository = driverSchoolRepository;
-    }
+public interface DriverSchoolService extends IService<DriverSchool, DriverschoolId>{
 
-    public Driverschool create(Driverschool driverschool){
-        return driverSchoolRepository.save(driverschool);
-    }
+//    CUSTOM FUNCTIONALITY:
 
-    public Driverschool read(Long id){
-        return driverSchoolRepository.findById(id).orElse(null);
-    }
-
-    public List<Driverschool> readAll(){
-        return driverSchoolRepository.findAll();
-    }
-
-    public Driverschool update(Driverschool driverschool){
-        return driverSchoolRepository.save(driverschool);
-    }
-
-    public void delete(Long id){
-        driverSchoolRepository.deleteById(id);
-    }
+    List<DriverSchool> getAllDriverSchools();
 }

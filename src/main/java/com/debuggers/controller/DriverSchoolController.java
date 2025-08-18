@@ -1,61 +1,49 @@
 package com.debuggers.controller;
 
-import com.debuggers.domain.Driverschool;
-import com.debuggers.service.DriverSchoolService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
+import com.debuggers.domain.DriverSchool;
+import com.debuggers.domain.DriverschoolId;
+import com.debuggers.service.impl.DriverSchoolServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/driverSchools")
+@RequestMapping("/driverschool")
 public class DriverSchoolController {
-    private final DriverSchoolService driverSchoolService;
 
-    public DriverSchoolController(DriverSchoolService driverSchoolService){
-        this.driverSchoolService = driverSchoolService;
+    private DriverSchoolServiceImpl service;
+
+    public DriverSchoolController(DriverSchoolServiceImpl service ){
+        this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<Driverschool> createDriverSchool(@RequestBody Driverschool driverschool){
-        Driverschool newDriverSchool = driverSchoolService.create(driverschool);
-        if(newDriverSchool == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-            return new ResponseEntity<>(driverschool,HttpStatus.CREATED);
+    // STORING/SENDING INFORMATION
+    @PostMapping("/create")
+    public DriverSchool create(@RequestBody DriverSchool driverSchool){
+        return service.create(driverSchool);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Driverschool> getDriverSchool(@PathVariable Long id){
-        Driverschool driverschool = driverSchoolService.read(id);
-        if(driverschool == null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-            return new ResponseEntity<>(driverschool,HttpStatus.OK);
+    // PASSING PRIMARY KEY + RETURNING THE RESULT
+    @GetMapping("/read/{driverschoolId}")
+    public DriverSchool read(@PathVariable DriverschoolId driverschoolId){
+        return service.read(driverschoolId);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Driverschool>> getAllDriverSchools(){
-        List<Driverschool> driverschools = driverSchoolService.readAll();
-        if(driverschools.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-            return new ResponseEntity<>(driverschools,HttpStatus.OK);
+    // TAKE OBJECT
+    @PutMapping("/update")
+    public DriverSchool update(@RequestBody DriverSchool driverSchool){
+        return service.update(driverSchool);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Driverschool> updateDriverSchool(@PathVariable Long id){
-        return new ResponseEntity<>(HttpStatus.OK);
+    @DeleteMapping("/delete/{d" +
+            "riverschoolId}")
+    public void delete(@PathVariable DriverschoolId driverschoolId){
+         this.service.delete(driverschoolId);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDriverSchool(@PathVariable Long id){
-        Driverschool driverschool = driverSchoolService.read(id);
-        if(driverschool == null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-            driverSchoolService.delete(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @GetMapping("/getAll")
+    public List<DriverSchool> getAll(){
+        return service.getAllDriverSchools();
     }
 }

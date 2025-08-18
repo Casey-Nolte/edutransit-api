@@ -1,38 +1,59 @@
 package com.debuggers.service.impl;
+/*
 
+     Author: Bonga Velem (220052379)
+
+    */
 import com.debuggers.domain.Parent;
 import com.debuggers.repository.ParentRepository;
 import com.debuggers.service.ParentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ParentServiceImpl implements ParentService {
 
-    private final ParentRepository parentRepository;
+    private final ParentRepository parentRepo;
 
-    public ParentServiceImpl(ParentRepository parentRepository) {
-        this.parentRepository = parentRepository;
+
+    @Autowired
+    public ParentServiceImpl(ParentRepository parentRepo){
+        this.parentRepo = parentRepo;
     }
 
     @Override
-    public Parent save(Parent parent) {
-        return parentRepository.save(parent);
+    public Parent create(Parent parent) {
+        return parentRepo.save(parent);
     }
 
     @Override
-    public Parent findById(Long id) {
-        return parentRepository.findById(id).orElse(null);
+    public Optional<Parent> read(Long id) {
+        return parentRepo.findById(id);
     }
 
     @Override
-    public List<Parent> findAll() {
-        return parentRepository.findAll();
+    public Parent update(Parent parent) {
+        return parentRepo.save(parent);
     }
 
     @Override
     public void delete(Long id) {
-        parentRepository.deleteById(id);
+         parentRepo.deleteById(id);
     }
+
+    public Set<Parent> getAllParent() {
+        return Set.copyOf(parentRepo.findAll());
+    }
+
+//    @Override
+//    public Set<Parent> getAllParent() {
+//        return parentRepo.getAllParent();
+//    }
+
+
+
+
 }

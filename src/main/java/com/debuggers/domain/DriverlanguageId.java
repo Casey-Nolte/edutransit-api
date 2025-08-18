@@ -4,11 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import org.hibernate.Hibernate;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class DriverlanguageId implements java.io.Serializable {
+public class DriverlanguageId implements Serializable {
+
     private static final long serialVersionUID = -7958449509087461336L;
+
     @Column(name = "driver_id", nullable = false)
     private Long driverId;
 
@@ -32,17 +35,21 @@ public class DriverlanguageId implements java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+    public boolean equals(Object o){
+        if (this == o)
+            return true;
+
+        if (o == null ||Hibernate.getClass(this) != Hibernate.getClass(o))
+                return false;
+
         DriverlanguageId entity = (DriverlanguageId) o;
-        return Objects.equals(this.driverId, entity.driverId) &&
-                Objects.equals(this.languageId, entity.languageId);
+
+            return Objects.equals(driverId,entity.driverId) &&
+                    Objects.equals(languageId,entity.languageId);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(driverId, languageId);
+    public int hashCode(){
+        return Objects.hash(driverId);
     }
-
 }

@@ -1,25 +1,26 @@
 package com.debuggers.factory;
 
 import com.debuggers.domain.Driver;
-import com.debuggers.domain.Drivervehicle;
+import com.debuggers.domain.DriverVehicle;
 import com.debuggers.domain.DrivervehicleId;
-import com.debuggers.domain.Vehicle;
+import com.debuggers.util.Helper;
 
 public class DriverVehicleFactory {
-    public static Drivervehicle createDriverVehicle(
-            Vehicle vehicle,
-            Driver driver,
-            DrivervehicleId id
+
+    public static DriverVehicle createDriverVehicle(
+            DrivervehicleId id, Vehicle vehicle, Driver driver
     ){
-        if(
-                vehicle == null ||  driver == null  ||  id == null
+        if (
+                Helper.IsEmptyOrNullString(String.valueOf(id))|| Helper.IsEmptyOrNullString(String.valueOf(vehicle))||
+                        Helper.IsEmptyOrNullString(String.valueOf(driver))
         ){
             return null;
         }
-        return new Drivervehicle.Builder()
-                .setVehicle(vehicle)
+
+        return new DriverVehicle.Builder()
                 .setDriver(driver)
                 .setId(id)
+                .setVehicle(vehicle)
                 .build();
     }
 }

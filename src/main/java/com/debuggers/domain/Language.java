@@ -18,30 +18,6 @@ public class Language {
     @Column(name = "code", nullable = false, length = 3)
     private String code;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLanguageName() {
-        return languageName;
-    }
-
-    public void setLanguageName(String languageName) {
-        this.languageName = languageName;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public Language() {
     }
 
@@ -50,6 +26,19 @@ public class Language {
         this.languageName = builder.languageName;
         this.code = builder.code;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getLanguageName() {
+        return languageName;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
 
     @Override
     public String toString() {

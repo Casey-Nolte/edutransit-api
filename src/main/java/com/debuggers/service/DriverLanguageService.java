@@ -1,34 +1,12 @@
 package com.debuggers.service;
 
-import com.debuggers.domain.Driverlanguage;
-import com.debuggers.repository.IDriverLanguageRepository;
+import com.debuggers.domain.DriverLanguage;
+import com.debuggers.domain.DriverlanguageId;
+import com.debuggers.domain.DriverschoolId;
 
 import java.util.List;
 
-public class DriverLanguageService {
-    private final IDriverLanguageRepository driverLanguageRepository;
+public interface DriverLanguageService extends IService<DriverLanguage, DriverlanguageId>{
+    List<DriverLanguage> getAllDriverLanguages();
 
-    public DriverLanguageService(IDriverLanguageRepository driverLanguageRepository){
-        this.driverLanguageRepository = driverLanguageRepository;
-    }
-
-    public Driverlanguage create(Driverlanguage driverlanguage){
-        return driverLanguageRepository.save(driverlanguage);
-    }
-
-    public Driverlanguage read(Long id){
-        return driverLanguageRepository.findById(id).orElse(null);
-    }
-
-    public List<Driverlanguage> readAll(){
-        return driverLanguageRepository.findAll();
-    }
-
-    public Driverlanguage update(Driverlanguage driverlanguage){
-        return driverLanguageRepository.save(driverlanguage);
-    }
-
-    public void delete(Long id){
-        driverLanguageRepository.deleteById(id);
-    }
 }

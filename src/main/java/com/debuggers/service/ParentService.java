@@ -1,12 +1,14 @@
 package com.debuggers.service;
+/*
 
+     Author: Bonga Velem (220052379)
+
+    */
 import com.debuggers.domain.Parent;
 
-import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
-public interface ParentService {
-    Parent save(Parent parent);
-    Parent findById(Long id);
-    List<Parent> findAll();
-    void delete(Long id);
+public interface ParentService extends Service<Parent, Long>{
+    Optional<Parent> read(Long id);
 }

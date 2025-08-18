@@ -1,25 +1,28 @@
 package com.debuggers.factory;
 
 import com.debuggers.domain.Driver;
-import com.debuggers.domain.Driverschool;
+import com.debuggers.domain.DriverSchool;
 import com.debuggers.domain.DriverschoolId;
-import com.debuggers.domain.School;
+import com.debuggers.util.Helper;
 
 public class DriverSchoolFactory {
-    public static Driverschool createDriverSchool(
-            DriverschoolId id,
-            Driver driver,
-            School school
+
+    public static DriverSchool createDriverSchool(
+            DriverschoolId id, Driver driver, School school
     ){
         if (
-                id == null || driver == null || school == null
+                Helper.IsEmptyOrNullString(String.valueOf(id)) ||
+                        Helper.IsEmptyOrNullString(String.valueOf(school)) ||
+                        Helper.IsEmptyOrNullString(String.valueOf(driver))
+
         ) {
             return null;
         }
-            return new Driverschool.Builder()
-                    .setDriverschoolId(id)
-                    .setDriver(driver)
-                    .setSchool(school)
-                    .build();
+
+        return new DriverSchool.Builder()
+                .setDriver(driver)
+                .setSchool(school)
+                .setDriverschoolId(id)
+                .build();
     }
 }

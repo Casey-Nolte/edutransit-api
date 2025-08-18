@@ -1,34 +1,16 @@
 package com.debuggers.service;
+/*
 
+     Author: Bonga Velem (220052379)
+
+    */
 import com.debuggers.domain.Driver;
-import com.debuggers.repository.IDriverRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-public class DriverService {
-    private final IDriverRepository driverRepository;
+public interface DriverService extends Service<Driver, Long> {
 
-    public DriverService(IDriverRepository driverRepository){
-        this.driverRepository = driverRepository;
-    }
-
-    public Driver create(Driver driver){
-        return driverRepository.save(driver);
-    }
-
-    public Driver read(Long id){
-        return driverRepository.findById(id).orElse(null);
-    }
-
-    public List<Driver> readAll(){
-        return driverRepository.findAll();
-    }
-
-    public Driver update(Driver driver){
-        return driverRepository.save(driver);
-    }
-
-    public void delete(Long id){
-        driverRepository.deleteById(id);
-    }
+    Optional<Driver> read(Long id);
+    List<Driver> findAll();
 }

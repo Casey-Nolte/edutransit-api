@@ -1,14 +1,23 @@
 package com.debuggers.domain;
+/* User.java
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+     User POJO class
+
+     Author: Bonga Velem (220052379)
+
+     */
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+import java.io.Serializable;
+import java.util.Collection;
+
 @Entity
 @Table(name = "user", schema = "prt3debuggers")
-public class User {
+public class User implements Serializable {
+
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     private Long id;
 
@@ -24,9 +33,17 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    public User() {}
+    // ✅ FIXED RELATIONSHIP (One User → Many Parents)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Collection<Parent> parents;
 
-    private User(Builder builder){
+    // Default constructor
+    public User() {
+    }
+
+    // Constructor using Builder
+    public User(Builder builder) {
         this.id = builder.id;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
@@ -34,6 +51,7 @@ public class User {
         this.password = builder.password;
     }
 
+    // Getters
     public Long getId() {
         return id;
     }
@@ -54,7 +72,49 @@ public class User {
         return password;
     }
 
-    public static class Builder{
+    public Collection<Parent> getParents() {
+        return parents;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setParents(Collection<Parent> parents) {
+        this.parents = parents;
+    }
+
+    // For debugging / output
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    // ✅ Builder Pattern
+    public static class Builder {
         private Long id;
         private String firstName;
         private String lastName;
@@ -86,7 +146,16 @@ public class User {
             return this;
         }
 
-        public User build(){
+        public Builder copy(User user) {
+            this.id = user.id;
+            this.firstName = user.firstName;
+            this.lastName = user.lastName;
+            this.emailAddress = user.emailAddress;
+            this.password = user.password;
+            return this;
+        }
+
+        public User build() {
             return new User(this);
         }
     }
